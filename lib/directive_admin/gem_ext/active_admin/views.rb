@@ -1,0 +1,6 @@
+require "directive_admin/gem_ext/active_admin/views/pages"
+require "directive_admin/gem_ext/active_admin/views/paginated_collection"
+require "directive_admin/gem_ext/active_admin/views/index_as_table"
+require "directive_admin/gem_ext/active_admin/views/attributes_table"
+require "directive_admin/gem_ext/active_admin/views/table_for"
+require "directive_admin/gem_ext/active_admin/views/list"

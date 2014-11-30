@@ -1,0 +1,1 @@
+require "directive_admin/gem_ext/kaminari/active_record_relation_methods"
