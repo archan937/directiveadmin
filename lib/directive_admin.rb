@@ -1,8 +1,12 @@
 require "activeadmin"
+require "pundit"
 require "directiverecord"
 
+require "directive_admin/call_stack"
+require "directive_admin/policy"
+require "directive_admin/pundit_adapter"
+
 ActiveAdmin.after_load do
-  require "directive_admin/call_stack"
   require "directive_admin/gem_ext"
 end
 

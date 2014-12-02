@@ -30,6 +30,7 @@ Gem::Specification.new do |gem|
 
   # gem.add_dependency "activeadmin", ">= 1.0.0"
   gem.add_dependency "directiverecord", "0.1.0"
+  gem.add_dependency "pundit", "0.3.0"
 
   gem.add_development_dependency "rake"
   gem.add_development_dependency "yard"
