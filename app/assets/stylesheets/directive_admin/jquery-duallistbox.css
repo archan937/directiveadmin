@@ -1,0 +1,50 @@
+.bootstrap-duallistbox-container {
+  overflow: auto;
+}
+
+.bootstrap-duallistbox-container .box1,
+.bootstrap-duallistbox-container .box2 {
+  width: 40%;
+  float: left;
+}
+
+.bootstrap-duallistbox-container .box1 .info-container,
+.bootstrap-duallistbox-container .box2 .info-container {
+  display: block;
+}
+
+.bootstrap-duallistbox-container .box1 label,
+.bootstrap-duallistbox-container .box2 label {
+  display: block;
+  float: none;
+}
+
+.bootstrap-duallistbox-container .box1 .filter,
+.bootstrap-duallistbox-container .box2 .filter {
+  margin-top: 4px;
+}
+
+.bootstrap-duallistbox-container .box1 .btn-group.buttons,
+.bootstrap-duallistbox-container .box2 .btn-group.buttons {
+  margin: 6px 0;
+}
+
+.bootstrap-duallistbox-container .box1 .glyphicon-arrow-right::before {
+  margin: 0 -3px 0 -2px;
+  font-style: normal;
+  content: ">";
+}
+
+.bootstrap-duallistbox-container .box2 .glyphicon-arrow-left::before {
+  margin: 0 -2px 0 -3px;
+  font-style: normal;
+  content: "<";
+}
+
+.bootstrap-duallistbox-container .box1 select,
+.bootstrap-duallistbox-container .box2 select {
+  width: 80%;
+  font-size: 1em;
+  font-family: Helvetica, Arial, sans-serif;
+  border: 1px solid #C9D0D6;
+}

@@ -2,12 +2,18 @@ require "activeadmin"
 require "pundit"
 require "directiverecord"
 
+require "directive_admin/engine"
 require "directive_admin/call_stack"
 require "directive_admin/policy"
 require "directive_admin/pundit_adapter"
 
 ActiveAdmin.after_load do
   require "directive_admin/gem_ext"
+
+  ActiveAdmin.setup do |config|
+    config.register_javascript "directive_admin/directive_admin.js"
+    config.register_stylesheet "directive_admin/directive_admin.css"
+  end
 end
 
 module DirectiveAdmin
