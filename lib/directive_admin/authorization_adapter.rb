@@ -1,6 +1,13 @@
+require "directive_admin/authorization_adapter/tree_definition"
+
 module DirectiveAdmin
-  class PunditAdapter < ActiveAdmin::AuthorizationAdapter
+  class AuthorizationAdapter < ActiveAdmin::AuthorizationAdapter
     include Pundit
+    extend TreeDefinition
+
+    def self.normalize(string)
+      string.split("/").collect{|x| x.gsub(/ \(\d+\)$/, "").parameterize(".")}.join("/")
+    end
 
     def authorized?(action, subject = nil, klass = nil, *args)
       policy(subject || resource, klass).send :"#{action}?", *args

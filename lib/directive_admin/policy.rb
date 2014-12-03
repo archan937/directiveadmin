@@ -2,6 +2,10 @@ module DirectiveAdmin
   class Policy
     attr_reader :user, :subject
 
+    def self.additional_actions
+      (instance_methods(false) - DirectiveAdmin::Policy.instance_methods).collect{|x| x.to_s.gsub!(/\?$/, "")}.compact
+    end
+
     def initialize(user, subject)
       @user = user
       @subject = subject
@@ -102,7 +106,7 @@ module DirectiveAdmin
     end
 
     def normalized_subject
-      subject.split("/").collect{|x| x.gsub(/ \(\d+\)$/, "").parameterize(".")}.join("/")
+      DirectiveAdmin::AuthorizationAdapter.normalize subject
     end
 
   end
