@@ -1,0 +1,30 @@
+div.check_boxes_tree {
+  overflow: auto;
+}
+
+div.check_boxes_tree div.wrapper {
+  float: left;
+}
+
+div.check_boxes_tree div.wrapper div div {
+  padding-left: 18px;
+}
+
+div.check_boxes_tree div.wrapper strong,
+div.check_boxes_tree div.wrapper i {
+  padding: 3px 0;
+  display: block;
+  color: #5E6469;
+}
+
+div.check_boxes_tree div.wrapper label {
+  width: auto;
+  padding: 5px 0;
+  float: none;
+  font-weight: normal;
+}
+
+div.check_boxes_tree div.wrapper input {
+  margin-right: 6px;
+}
+
