@@ -20,6 +20,10 @@ module DirectiveAdmin
 
   PATH_REGEX = /^\w+(\.\w+)+$/
 
+  def self.namespace
+    ActiveAdmin.application.namespaces[ActiveAdmin.application.default_namespace]
+  end
+
   def self.to_table_collection(collection, options = nil, &block)
     call_stack = CallStack.new
     call_stack.track! &block
