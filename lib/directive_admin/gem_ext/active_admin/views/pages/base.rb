@@ -3,11 +3,6 @@ module ActiveAdmin
     module Pages
       class Base < Arbre::HTML::Document
 
-        def cake_status_tag(object)
-          return unless (status = object["account_status.name"])
-          status_tag status, {"Active" => :ok, "Inactive" => :error, "Pending" => :warn}[status]
-        end
-
         def collection_panel(name, &block)
           collection = scope resource.send(name)
           label = name.to_s.humanize
