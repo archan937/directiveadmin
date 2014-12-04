@@ -8,6 +8,18 @@ module ActiveAdmin
           status_tag status, {"Active" => :ok, "Inactive" => :error, "Pending" => :warn}[status]
         end
 
+        def collection_panel(name, &block)
+          collection = scope resource.send(name)
+          label = name.to_s.humanize
+          panel "#{label} (#{collection.size})" do
+            if collection.empty?
+              span "No #{label.downcase} yet."
+            else
+              table_for collection, &block
+            end
+          end
+        end
+
         alias :original_panel :panel
 
         def panel(*args, &block)
