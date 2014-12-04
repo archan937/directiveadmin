@@ -14,6 +14,7 @@ module DirectiveAdmin
     def track!(*included, &block)
       @included = included.flatten.compact
       calls.clear
+      @locked = false
       instance_exec &block
       @locked = true
     end
