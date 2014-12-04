@@ -13,6 +13,12 @@
   display: block;
 }
 
+.bootstrap-duallistbox-container .box1 .info-container button,
+.bootstrap-duallistbox-container .box2 .info-container button {
+  margin-left: 3px;
+  font-family: Arial, sans-serif;
+}
+
 .bootstrap-duallistbox-container .box1 label,
 .bootstrap-duallistbox-container .box2 label {
   display: block;
@@ -27,6 +33,13 @@
 .bootstrap-duallistbox-container .box1 .btn-group.buttons,
 .bootstrap-duallistbox-container .box2 .btn-group.buttons {
   margin: 6px 0;
+}
+
+.bootstrap-duallistbox-container .box1 .btn-group.buttons button,
+.bootstrap-duallistbox-container .box2 .btn-group.buttons button {
+  margin: 0;
+  padding: 3px 10px 4px;
+  font-family: Tahoma;
 }
 
 .bootstrap-duallistbox-container .box1 .glyphicon-arrow-right::before {
@@ -47,4 +60,32 @@
   font-size: 1em;
   font-family: Helvetica, Arial, sans-serif;
   border: 1px solid #C9D0D6;
+}
+
+.bootstrap-duallistbox-container .box1 button,
+.bootstrap-duallistbox-container .box2 button {
+  padding: 3px 6px;
+  color: #222;
+  display: inline-block;
+  font-weight: normal;
+  text-shadow: 0 1px 0 white;
+  background: white;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  border: 1px solid #DEDEDE;
+  border-color: #DEDEDE #D8D8D8 #D3D3D3;
+  -webkit-box-shadow: 0 1px 1px #EAEAEA, inset 0 1px 0 #FBFBFB;
+  -moz-box-shadow: 0 1px 1px #EAEAEA, inset 0 1px 0 #FBFBFB;
+  box-shadow: 0 1px 1px #EAEAEA, inset 0 1px 0 #FBFBFB;
+}
+
+.bootstrap-duallistbox-container .box1 button:hover,
+.bootstrap-duallistbox-container .box2 button:hover {
+  background: #F2F2F2;
+}
+
+.bootstrap-duallistbox-container .box1 button:focus,
+.bootstrap-duallistbox-container .box2 button:focus {
+  outline: none;
 }
