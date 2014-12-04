@@ -115,7 +115,23 @@ module DirectiveAdmin
 
       def rows_definition(key)
         compose_definition key, :row, {:label => "Attributes", :track => :attributes_table} do |page_presenters|
-          page_presenters[:show]
+          page_presenters[:show] || begin
+
+            resource = resource_for_key(key)
+            action_methods = resource.controller.action_methods
+            policy = "#{resource.controller.resource_class.name}Policy".constantize.new nil, nil
+
+            if action_methods.include?("show") && (policy.send(:show?) rescue nil) != false
+              names = resource.resource_class.columns.collect{|column| column.name.to_sym}
+              block = proc {
+                attributes_table do
+                  names.each{|name| row name}
+                end
+              }
+              Struct.new(:block).new(block)
+            end
+
+          end
         end
       end
 
@@ -147,7 +163,7 @@ module DirectiveAdmin
       def compose_definition(key, type, options = {}, &block)
         call_stack = track_calls key, options[:track], &block
 
-        children = (call_stack[type.to_sym] || []).collect do |args, block|
+        children = (call_stack[type.to_sym] || []).collect do |args, blck|
           opts = args.extract_options!
           args.pop if [true, false].include? args[-1]
           args = args.collect(&:to_s)
