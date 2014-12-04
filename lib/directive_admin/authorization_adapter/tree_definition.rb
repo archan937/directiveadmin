@@ -101,8 +101,15 @@ module DirectiveAdmin
       end
 
       def columns_definition(key)
-        compose_definition key, :column do |page_presenters|
+        compose_definition(key, :column) do |page_presenters|
           page_presenters[:index][:table]
+        end.tap do |definition|
+          call_stack = track_calls key do |page_presenters|
+            page_presenters[:index][:table]
+          end
+          unless call_stack[:id_column].blank?
+            definition[0][:children].unshift :name => "#{key}[columns][]", :label => "ID", :value => "id"
+          end
         end
       end
 
@@ -113,8 +120,21 @@ module DirectiveAdmin
       end
 
       def panels_definition(key, page)
-        compose_definition key, :panel do |page_presenters|
+        collection_panel = compose_definition key, :collection_panel do |page_presenters|
           page_presenters[page]
+        end
+        panel = compose_definition(key, :panel) do |page_presenters|
+          page_presenters[page]
+        end
+        children = [(collection_panel[0] || {})[:children], (panel[0] || {})[:children]].flatten.compact
+        if children.any?
+          children.each do |child|
+            child[:label] << " (0)" if child[:name].include?("collection_")
+            child[:name].gsub! "collection_", ""
+          end
+          [{:label => "Panels", :italic => true, :children => children}]
+        else
+          []
         end
       end
 
@@ -124,12 +144,9 @@ module DirectiveAdmin
         end
       end
 
-      def compose_definition(key, type, options = {})
-        resource = resource_for_key(key)
-        block = yield(resource.page_presenters).try(:block)
+      def compose_definition(key, type, options = {}, &block)
+        call_stack = track_calls key, options[:track], &block
 
-        call_stack = CallStack.new
-        call_stack.track! options[:track], &block if block
         children = (call_stack[type.to_sym] || []).collect do |args, block|
           opts = args.extract_options!
           args.pop if [true, false].include? args[-1]
@@ -144,6 +161,15 @@ module DirectiveAdmin
         end.compact
 
         children.present? ? [{:label => options[:label] || type.to_s.pluralize.humanize, :italic => true, :children => children}] : []
+      end
+
+      def track_calls(key, track = nil)
+        resource = resource_for_key(key)
+        block = yield(resource.page_presenters).try(:block)
+
+        call_stack = CallStack.new
+        call_stack.track! track, &block if block
+        call_stack.calls
       end
 
       def resource_for_key(key)
