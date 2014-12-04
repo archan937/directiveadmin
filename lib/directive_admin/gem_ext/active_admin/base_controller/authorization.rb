@@ -4,9 +4,8 @@ module ActiveAdmin
 
     protected
 
-      def authorized?(action, subject = nil, klass = nil, *args)
-        arguments = [action, subject, klass].first(active_admin_authorization.method(:authorized?).arity.abs)
-        active_admin_authorization.send :authorized?, *arguments, *args
+      def authorized?(*args)
+        active_admin_authorization.send :authorized?, *args
       end
 
     end
