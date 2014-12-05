@@ -147,6 +147,7 @@ module DirectiveAdmin
           children.each do |child|
             child[:label] << " (0)" if child[:name].include?("collection_")
             child[:name].gsub! "collection_", ""
+            child[:value] = normalize child[:label]
           end
           [{:label => "Panels", :italic => true, :children => children}]
         else

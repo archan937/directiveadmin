@@ -5,7 +5,13 @@ module ActiveAdmin
 
         def collection_panel(name, &block)
           collection = scope resource.send(name)
+          klass = resource.send(name).klass
           label = name.to_s.humanize
+
+          unless block_given?
+            block = DirectiveAdmin.namespace.resources.detect{|x| (x.resource_class rescue nil) == klass}.page_presenters[:index][:table].block
+          end
+
           panel "#{label} (#{collection.size})" do
             if collection.empty?
               span "No #{label.downcase} yet."
