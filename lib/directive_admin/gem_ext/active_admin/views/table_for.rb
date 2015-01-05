@@ -8,8 +8,7 @@ module ActiveAdmin
         options = default_options.merge(args.extract_options!)
 
         klass = (@collection.instance_variable_get(:@active_relation) || @collection).klass
-        options[:link_to] = klass if options[:link_to]
-        options[:links_to] = klass if options[:links_to]
+        options[:klass] = klass
 
         if args[0].is_a?(ActiveAdmin::Component)
           title = args[0]
