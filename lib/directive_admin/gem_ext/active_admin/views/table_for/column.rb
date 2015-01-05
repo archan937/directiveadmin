@@ -8,6 +8,11 @@ module ActiveAdmin
           @title = args[0]
 
           html_classes = [:col]
+
+          if @options[:right] || @options[:unit] || @options[:precision]
+            html_classes << "align-right"
+          end
+
           if @options.has_key?(:class)
             html_classes << @options.delete(:class)
           elsif @title.present?
@@ -24,6 +29,14 @@ module ActiveAdmin
           @options[:sortable] = key unless @options[:sortable] == false
 
           url_prefix = DirectiveAdmin.namespace.name
+
+          if @options[:unit] || @options[:precision]
+            @data = proc { |row|
+              @options[:unit] ||= ""
+              value = row[key]
+              ActiveSupport::NumberHelper.number_to_currency value, @options
+            }
+          end
 
           if @options[:link_to]
             id = key.gsub(/\w+$/, "id")
