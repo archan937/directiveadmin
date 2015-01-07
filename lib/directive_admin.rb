@@ -3,6 +3,8 @@ require "pundit"
 require "directiverecord"
 
 require "directive_admin/engine"
+require "directive_admin/middleware"
+require "directive_admin/impersonator"
 require "directive_admin/authorization_adapter"
 require "directive_admin/call_stack"
 require "directive_admin/policy"
@@ -11,8 +13,24 @@ ActiveAdmin.after_load do
   require "directive_admin/gem_ext"
 
   ActiveAdmin.setup do |config|
+    if current_user_method = config.current_user_method
+      actual_user_method = current_user_method.to_s.gsub("current", "actual")
+      ApplicationController.send :include, DirectiveAdmin::Impersonator
+    end
     config.register_javascript "directive_admin/directive_admin.js"
     config.register_stylesheet "directive_admin/directive_admin.css"
+    config.before_filter do
+      config.namespace DirectiveAdmin.namespace.name do |admin|
+        admin.menus.instance_variable_get(:@menus).delete(key = :utility_navigation)
+        admin.menus.menu(key) do |menu|
+          admin.add_current_user_to_menu menu
+          if current_user_method && (current_user = send(current_user_method)) && UserPolicy.new(send(actual_user_method), nil).impersonate?
+            admin.add_impersonable_users_to_menu menu, current_user
+          end
+          admin.add_logout_button_to_menu menu
+        end
+      end
+    end
   end
 end
 
