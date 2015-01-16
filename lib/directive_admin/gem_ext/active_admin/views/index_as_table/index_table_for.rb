@@ -25,8 +25,7 @@ module ActiveAdmin
             item I18n.t("active_admin.edit"), "#{path}/edit", class: "edit_link #{options[:css_class]}"
           end
           if controller.action_methods.include?("destroy") && authorized?(ActiveAdmin::Auth::DESTROY, row)
-            item I18n.t("active_admin.delete"), path, class: "delete_link #{options[:css_class]}",
-              method: :delete, data: {confirm: I18n.t("active_admin.delete_confirmation")}
+            item I18n.t("active_admin.delete"), path, class: "delete_link #{options[:css_class]}", method: :delete, data: {confirm: I18n.t("active_admin.delete_confirmation")}
           end
         end
 

@@ -1,0 +1,22 @@
+span.customSelect {
+  padding: 1px 7px 0 10px;
+  color: black;
+  font-size: 0.95em;
+  line-height: 23px;
+  overflow: visible;
+  background: white;
+  border: 1px solid #c9d0d6;
+  border-radius: 3px;
+}
+
+span.customSelect .caret {
+  margin-top: 10px;
+  float: right;
+  border-top: 3px solid;
+  border-right: 4px solid transparent;
+  border-left: 4px solid transparent;
+}
+
+span.customSelect.customSelectDisabledOption {
+  color: #AAA;
+}
