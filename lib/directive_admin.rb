@@ -68,6 +68,7 @@ module DirectiveAdmin
     select.uniq!
 
     qry_options = collection.qry_options(select)
+    qry_options[:optimize] = true
     qry_options[:group_by] = "id" if klass.columns_hash.include?("id")
 
     select = select.collect{|x| x.match(/ AS (\w+)$/); $1 || x}
