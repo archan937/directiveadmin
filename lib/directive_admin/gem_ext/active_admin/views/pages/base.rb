@@ -28,7 +28,7 @@ module ActiveAdmin
         def scope(collection)
           klass = collection.klass
           scoped_collection = active_admin_authorization.scope_collection(collection)
-          klass.instantiate_all scoped_collection.query_options[:where], scoped_collection
+          klass.instantiate_all scoped_collection.qry_options[:where], scoped_collection
         end
 
       end
