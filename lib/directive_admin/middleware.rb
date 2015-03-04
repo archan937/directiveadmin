@@ -19,7 +19,7 @@ module DirectiveAdmin
           end
 
           env["rack.session"][:"impersonated_#{user_scope}_id"] = impersonated_user_id
-          location = Rack::Request.new(env).referrer
+          location = env["HTTP_X_XHR_REFERER"] || Rack::Request.new(env).referrer
 
           if location.nil? || URI.parse(location).path.match(regex)
             location = "/#{DirectiveAdmin.namespace.name}"
