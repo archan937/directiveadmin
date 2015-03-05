@@ -4,7 +4,7 @@ module ActiveRecord
     def self.instantiate_all(conditions, active_relation = nil)
       conditions = [conditions].flatten.compact
       options = {
-        :select => "*",
+        :select => ".*",
         :where => conditions,
         :group_by => ("id" if columns_hash.include?("id"))
       }
