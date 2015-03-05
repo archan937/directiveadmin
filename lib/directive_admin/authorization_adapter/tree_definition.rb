@@ -5,7 +5,7 @@ module DirectiveAdmin
       def tree
         DirectiveAdmin.namespace.fetch_menu(:default)
 
-        children = DirectiveAdmin.namespace.resources.values.sort_by{|x| x.menu_item.priority}.collect do |resource|
+        children = DirectiveAdmin.namespace.resources.values.select(&:menu_item).sort_by{|x| x.menu_item.priority}.collect do |resource|
           menu_item = resource.menu_item
           resource_page = resource.is_a?(ActiveAdmin::Resource)
           key = (resource_page ? resource.resource_class.name : menu_item.id).underscore.to_sym
