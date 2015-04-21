@@ -81,8 +81,8 @@ module DirectiveAdmin
         policy = "#{resource.controller.resource_class.name}Policy".constantize.new nil, nil
 
         actions = [
-          {:label => "Create", :name => "create", :method => "new"},
-          {:label => "Update", :name => "update", :method => "edit"},
+          {:label => "Create", :name => "create", :method => "create"},
+          {:label => "Update", :name => "update", :method => "update"},
           {:label => "Destroy", :name => "destroy", :method => "destroy"}
         ]
 
