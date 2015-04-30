@@ -6,8 +6,11 @@ module ActiveAdmin
   module Devise
 
     def self.config
+      if ActiveAdmin.application.default_namespace
+        path = ActiveAdmin.application.namespaces[ActiveAdmin.application.default_namespace].route_prefix || ActiveAdmin.application.default_namespace
+      end
       {
-        path: ActiveAdmin.application.default_namespace || "/",
+        path: path || "/",
         controllers: ActiveAdmin::Devise.controllers,
         path_names: { sign_in: 'login', sign_out: "logout" },
         sign_out_via: [*::Devise.sign_out_via, ActiveAdmin.application.logout_link_method].uniq
