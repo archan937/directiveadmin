@@ -10,6 +10,7 @@ require "directive_admin/call_stack"
 require "directive_admin/policy"
 
 require "directive_admin/gem_ext/active_admin/application"
+require "directive_admin/gem_ext/active_admin/namespace"
 require "directive_admin/gem_ext/active_admin/router"
 require "directive_record/gem_ext/active_record/relation/count"
 

@@ -7,7 +7,7 @@ module ActiveAdmin
 
     def self.config
       if ActiveAdmin.application.default_namespace
-        path = ActiveAdmin.application.namespaces[ActiveAdmin.application.default_namespace].route_prefix || ActiveAdmin.application.default_namespace
+        path = ActiveAdmin.application.namespaces[ActiveAdmin.application.default_namespace].route_prefix
       end
       {
         path: path || "/",

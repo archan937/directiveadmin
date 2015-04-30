@@ -36,7 +36,7 @@ module ActiveAdmin
 
           @options[:sortable] = key unless @options[:sortable] == false
 
-          url_prefix = DirectiveAdmin.namespace.name
+          route_prefix = DirectiveAdmin.namespace.route_prefix
 
           if (@options[:unit] || @options[:precision]) && !@data.is_a?(Proc)
             @data = proc { |row|
@@ -48,7 +48,7 @@ module ActiveAdmin
 
           if @options[:link_to]
             id = key.gsub(/\w+$/, "id")
-            path = "/#{url_prefix}/#{key.split(".")[0..-2].inject(@options[:klass]) do |klass, association|
+            path = "/#{route_prefix}/#{key.split(".")[0..-2].inject(@options[:klass]) do |klass, association|
               klass.reflect_on_association(association.to_sym).klass
             end.name.tableize}"
             @data = proc { |row|
@@ -59,7 +59,7 @@ module ActiveAdmin
 
           if @options[:links_to]
             id = key.gsub(/\w+$/, "id")
-            path = "/#{url_prefix}/#{key.split(".")[0..-2].inject(@options[:klass]) do |klass, association|
+            path = "/#{route_prefix}/#{key.split(".")[0..-2].inject(@options[:klass]) do |klass, association|
               klass.reflect_on_association(association.to_sym).klass
             end.name.tableize}"
             @data = proc { |row|

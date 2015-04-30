@@ -22,7 +22,7 @@ module DirectiveAdmin
           location = env["HTTP_X_XHR_REFERER"] || Rack::Request.new(env).referrer
 
           if location.nil? || URI.parse(location).path.match(regex)
-            location = "/#{DirectiveAdmin.namespace.name}"
+            location = "/#{DirectiveAdmin.namespace.route_prefix}"
           end
 
           return [302, {"Location" => location}, ["Moved Temporarily"]]

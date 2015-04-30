@@ -7,8 +7,7 @@ module ActiveAdmin
           if namespace.root?
             root namespace.root_to_options.merge(to: namespace.root_to)
           else
-            options = namespace.route_prefix ? {path: namespace.route_prefix} : {}
-            namespace namespace.name, options do
+            namespace namespace.name, path: namespace.route_prefix do
               root namespace.root_to_options.merge(to: namespace.root_to)
             end
           end
@@ -41,8 +40,7 @@ module ActiveAdmin
           unless config.namespace.root?
             nested = routes
             routes = Proc.new do
-              options = config.namespace.route_prefix ? {path: config.namespace.route_prefix} : {}
-              namespace config.namespace.name, options do
+              namespace config.namespace.name, path: config.namespace.route_prefix do
                 instance_exec &nested
               end
             end
