@@ -12,12 +12,14 @@ module ActiveAdmin
 
           key.gsub!(/^.+ AS /, "") if key.is_a?(String)
 
-          if column = @options[:klass].columns_hash[key]
-            case column.type
-            when :integer
-              @options[:precision] ||= 0
-            else
-              @options[:precision] ||= column.scale
+          unless @options.include?(:precision)
+            if column = @options[:klass].columns_hash[key]
+              case column.type
+              when :integer
+                @options[:precision] = 0
+              else
+                @options[:precision] = column.scale
+              end
             end
           end
 
