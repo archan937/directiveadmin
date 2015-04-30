@@ -1,5 +1,14 @@
 module ActiveAdmin
   class Namespace
+    include AssetRegistration
+
+    def javascripts
+      @javascripts ||= (Set.new + ActiveAdmin.application.javascripts)
+    end
+
+    def stylesheets
+      @stylesheets ||= {}.merge(ActiveAdmin.application.stylesheets)
+    end
 
     def route_prefix
       if instance_variable_defined? :@route_prefix
