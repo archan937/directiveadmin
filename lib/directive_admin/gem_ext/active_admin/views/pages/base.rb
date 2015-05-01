@@ -29,6 +29,17 @@ module ActiveAdmin
           active_admin_authorization.scope_collection(collection)
         end
 
+      private
+
+        alias_method :original_add_classes_to_body, :add_classes_to_body
+
+        def add_classes_to_body
+          original_add_classes_to_body
+          active_admin_namespace.body_classes.each do |body_class|
+            @body.add_class(body_class)
+          end
+        end
+
       end
     end
   end

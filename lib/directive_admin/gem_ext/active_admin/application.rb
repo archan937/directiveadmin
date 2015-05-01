@@ -1,7 +1,9 @@
 module ActiveAdmin
   class Application
 
+    inheritable_setting :body_classes, []
     inheritable_setting :route_prefix, nil
+
     attr_reader :selected_namespace
 
     def select_namespace!(namespace)

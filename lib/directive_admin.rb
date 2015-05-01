@@ -16,7 +16,6 @@ require "directive_record/gem_ext/active_record/relation/count"
 
 ActiveAdmin.after_load do
   require "directive_admin/gem_ext"
-
   config = ActiveAdmin.application
 
   if current_user_method = config.current_user_method
@@ -39,8 +38,6 @@ ActiveAdmin.after_load do
       end
     end
   end
-
-  config.prepare!
 end
 
 module DirectiveAdmin

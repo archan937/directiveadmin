@@ -3,11 +3,13 @@ module ActiveAdmin
     include AssetRegistration
 
     def javascripts
-      @javascripts ||= (Set.new + ActiveAdmin.application.javascripts)
+      (@javascripts ||= Set.new) + ActiveAdmin.application.javascripts
+      @javascripts
     end
 
     def stylesheets
-      @stylesheets ||= {}.merge(ActiveAdmin.application.stylesheets)
+      (@stylesheets ||= {}).merge!(ActiveAdmin.application.stylesheets)
+      @stylesheets
     end
 
     def route_prefix

@@ -1,48 +1,50 @@
-#title_bar h2
-  font-size: 2em
+body.directive_admin
 
-#header #utility_nav li ul
-  text-align: left
+  #title_bar h2
+    font-size: 2em
 
-thead
-  background: white
+  #header #utility_nav li ul
+    text-align: left
 
-body.active_admin
-  div.plot-data
-    h3, tfoot
+  thead
+    background: white
+
+  body.active_admin
+    div.plot-data
+      h3, tfoot
+        display: none
+
+  div#main_content
+    colgroup
       display: none
+    td.col
+      overflow: hidden
+      white-space: nowrap
+      text-overflow: ellipsis
 
-div#main_content
-  colgroup
-    display: none
-  td.col
-    overflow: hidden
-    white-space: nowrap
-    text-overflow: ellipsis
+  div.index_as_table
+    th
+      padding: 3px 10px 2px 10px
+    td
+      padding: 4px 12px 2px 12px
 
-div.index_as_table
-  th
-    padding: 3px 10px 2px 10px
-  td
-    padding: 4px 12px 2px 12px
+  .panel table, table.index_table
+    th, td
+      &.align-right
+        text-align: right
 
-.panel table, table.index_table
-  th, td
-    &.align-right
-      text-align: right
+  .attributes_table table
+    th, td
+      padding-top: 6px
+      padding-bottom: 4px
 
-.attributes_table table
-  th, td
-    padding-top: 6px
-    padding-bottom: 4px
+  .sidebar_section
+    h3
+      padding: 3px 10px 2px 10px
 
-.sidebar_section
-  h3
-    padding: 3px 10px 2px 10px
-
-fieldset .datetime_select .fragments-group
-  li
-    padding-right: 8px
-    display: inline-block
-  label
-    display: none
+  fieldset .datetime_select .fragments-group
+    li
+      padding-right: 8px
+      display: inline-block
+    label
+      display: none
