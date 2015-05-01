@@ -19,7 +19,7 @@ module ActiveAdmin
 
     def all_javascripts
       namespaces.inject(Set.new) do |js, (name, namespace)|
-        js + namespace.javascripts
+        js.merge namespace.javascripts
       end
     end
 

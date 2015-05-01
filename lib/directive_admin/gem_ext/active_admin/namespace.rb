@@ -3,7 +3,7 @@ module ActiveAdmin
     include AssetRegistration
 
     def javascripts
-      (@javascripts ||= Set.new) + ActiveAdmin.application.javascripts
+      (@javascripts ||= Set.new).merge(ActiveAdmin.application.javascripts)
       @javascripts
     end
 
