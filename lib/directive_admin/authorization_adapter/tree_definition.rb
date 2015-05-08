@@ -102,10 +102,10 @@ module DirectiveAdmin
 
       def columns_definition(key)
         compose_definition(key, :column) do |page_presenters|
-          page_presenters[:index][:table]
+          page_presenters[:index][:table] if page_presenters[:index]
         end.tap do |definition|
           call_stack = track_calls key do |page_presenters|
-            page_presenters[:index][:table]
+            page_presenters[:index][:table] if page_presenters[:index]
           end
           unless call_stack[:id_column].blank?
             definition[0][:children].unshift :name => "#{key}[columns][]", :label => "ID", :value => "id"

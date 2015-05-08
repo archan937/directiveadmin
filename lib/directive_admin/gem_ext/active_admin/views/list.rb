@@ -53,7 +53,7 @@ module ActiveAdmin
       end
 
       def add(attribute)
-        @select << attribute.to_s
+        (@select ||= []) << attribute.to_s
       end
 
     end
