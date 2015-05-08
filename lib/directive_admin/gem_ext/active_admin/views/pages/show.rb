@@ -17,10 +17,6 @@ module ActiveAdmin
           end
         end
 
-        def timeline
-          render partial: "timeline"
-        end
-
       end
     end
   end

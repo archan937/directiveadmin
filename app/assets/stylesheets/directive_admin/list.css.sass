@@ -1,0 +1,53 @@
+$skinActiveColor: #E73C3C !default
+
+div.small.panel, div.list.panel
+  width: 500px
+  position: relative
+  z-index: 1
+
+  h3
+    margin-bottom: 0
+    font-size: 11.5px
+    border: 0
+
+div.small.panel
+  div.panel_contents
+    &, .attributes_table, .attributes_table table
+      margin: 0
+      padding: 0
+
+    .attributes_table table
+      th
+        font-size: 10px
+
+      th, td
+        padding: 8px 15px 6px 15px
+        border-top: 1px solid #DDD
+        border-bottom: 0
+
+div.list.panel
+  h3
+    border-bottom: 1px solid #DDD
+
+  div.panel_contents
+    margin: 0
+    padding: 10px 15px 8px 15px
+
+    ul
+      list-style: none
+
+      &, p
+        margin: 0
+        padding: 0
+
+    div.container
+      span
+        color: #5E6469
+
+      a
+        color: #428BCA
+        font-weight: bold
+        text-decoration: none
+
+      &:hover
+        color: $skinActiveColor

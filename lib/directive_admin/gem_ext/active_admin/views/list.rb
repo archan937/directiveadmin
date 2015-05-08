@@ -2,17 +2,7 @@ module ActiveAdmin
   module Views
     class List < ActiveAdmin::Component
 
-      BuilderMethods.class_eval <<-EOF
-        def list(*args, &block)
-          tag = ::#{self.name}.new arbre_context
-          tag.parent = current_arbre_element
-          with_current_arbre_element tag do
-            tag.build(*args, &block)
-          end
-          current_arbre_element.add_child tag
-          tag
-        end
-      EOF
+      builder_method :list
 
       def build(title, &block)
         name = title.underscore
@@ -30,14 +20,16 @@ module ActiveAdmin
 
         collection = active_admin_authorization.scope_collection(resource.send(name))
         klass = collection.klass
-        qry_options = collection.qry_options(@select).merge(:group_by => :id, :order_by => keys)
+        qry_options = collection.qry_options(*@select).merge(:group_by => "id", :order_by => keys) rescue binding.pry
 
-        collection = klass.connection.select_all(Breakdownce::Adapters::MySQL.to_select_query(klass, qry_options)).group_by{|x| x.values_at(*keys)}.values.collect do |data|
+        collection = klass.connection.select_all(klass.to_qry(qry_options)).group_by{|x| x.values_at(*keys)}.values.collect do |data|
           attributes = data.first
           klass.instantiate attributes
         end
 
-        panel "#{title} (#{collection.size})" do
+        add_class "panel"
+        h3 "#{title} (#{collection.size})"
+        div class: "panel_contents" do
           ul :class => name, :"data-parent" => "#{resource.class.reflect_on_association(name.to_sym).foreign_key}##{resource.id}" do
             key = name.singularize.to_sym
             collection.each do |record|
