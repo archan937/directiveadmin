@@ -38,7 +38,7 @@ module ActiveAdmin
           end
           if authorized? :create, klass
             div :class => "container" do
-              a :href => "#", :class => "create" do
+              a :href => "#", :class => "create", :"data-no-turbolink" => "true" do
                 "Create a#{"n" if %w(a e i u o).include? name[0]} #{name.singularize}"
               end
             end
