@@ -21,7 +21,7 @@ module ActiveAdmin
         collection = active_admin_authorization.scope_collection(resource.send(name))
         klass = collection.klass
         default_attributes = Hash[klass.column_names.zip]
-        qry_options = collection.qry_options(*@select).merge(:group_by => "id", :order_by => keys) rescue binding.pry
+        qry_options = collection.qry_options(*@select).merge(:group_by => "id", :order_by => keys)
 
         collection = klass.connection.select_all(klass.to_qry(qry_options)).group_by{|x| x.values_at(*keys)}.values.collect do |data|
           attributes = data.first
