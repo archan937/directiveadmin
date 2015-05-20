@@ -10,11 +10,21 @@ module ActiveAdmin
     def new
       new! do |format|
         format.js { render partial: "#{controller_name}/form", locals: {resource_class.name.underscore.to_sym => resource} }
+      end.tap do |response|
+        if (request.format.to_sym == :html) && (referer = request.referer) && ((referer = URI(referer).path) != request.path)
+          response[0].gsub!(/<form .*?>/) do |form|
+            "#{form}<input type='hidden' name='_referer' value='#{referer}'>"
+          end
+        end
       end
     end
 
     def create
-      create! do |format|
+      options = {}
+      if (request.format.to_sym == :html) && (referer = params[:_referer])
+        options[:location] = referer
+      end
+      create!(options) do |format|
         format.js { render partial: "#{controller_name}/show", locals: {resource_class.name.underscore.to_sym => resource} }
       end
     end
@@ -22,11 +32,21 @@ module ActiveAdmin
     def edit
       edit! do |format|
         format.js { render partial: "#{controller_name}/form", locals: {resource_class.name.underscore.to_sym => resource} }
+      end.tap do |response|
+        if (request.format.to_sym == :html) && (referer = request.referer) && ((referer = URI(referer).path) != request.path)
+          response[0].gsub!(/<form .*?>/) do |form|
+            "#{form}<input type='hidden' name='_referer' value='#{URI(referer).path}'>"
+          end
+        end
       end
     end
 
     def update
-      update! do |format|
+      options = {}
+      if (request.format.to_sym == :html) && (referer = params[:_referer])
+        options[:location] = referer
+      end
+      update!(options) do |format|
         format.js { render partial: "#{controller_name}/show", locals: {resource_class.name.underscore.to_sym => resource} }
       end
     end
