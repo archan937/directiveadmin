@@ -9,7 +9,7 @@ module ActiveAdmin
         return unless authorized?(:list, name, resource.class)
 
         @select = []
-        yield if block_given?
+        instance_exec(&block) if block_given?
 
         keys = @select.to_a
         @select += @select.collect do |path|
@@ -20,11 +20,12 @@ module ActiveAdmin
 
         collection = active_admin_authorization.scope_collection(resource.send(name))
         klass = collection.klass
+        default_attributes = Hash[klass.column_names.zip]
         qry_options = collection.qry_options(*@select).merge(:group_by => "id", :order_by => keys) rescue binding.pry
 
         collection = klass.connection.select_all(klass.to_qry(qry_options)).group_by{|x| x.values_at(*keys)}.values.collect do |data|
           attributes = data.first
-          klass.instantiate attributes
+          klass.instantiate default_attributes.merge(attributes)
         end
 
         add_class "panel"

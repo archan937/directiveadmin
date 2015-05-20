@@ -17,6 +17,13 @@ module ActiveAdmin
           end
         end
 
+        def list(*args, &block)
+          wrapped_block = proc do |foo|
+            yield block
+          end
+          insert_tag Views::List, *args, &wrapped_block
+        end
+
       end
     end
   end
