@@ -7,7 +7,7 @@ module ActiveAdmin
           column "id" do |row|
             id = row["id"]
             if controller.action_methods.include?("show")
-              link_to id, "/#{DirectiveAdmin.namespace.route_prefix}/#{@resource_class.name.tableize}/#{id}"
+              link_to id, "/#{DirectiveAdmin.namespace.route_prefix}/#{active_admin_config.resource_name.route_key}/#{id}"
             else
               id
             end
@@ -17,7 +17,7 @@ module ActiveAdmin
       private
 
         def defaults(row, options = {})
-          path = "/#{DirectiveAdmin.namespace.route_prefix}/#{@resource_class.name.demodulize.tableize}/#{row["id"]}"
+          path = "/#{DirectiveAdmin.namespace.route_prefix}/#{active_admin_config.resource_name.route_key}/#{row["id"]}"
           if controller.action_methods.include?("show") && authorized?(ActiveAdmin::Auth::READ, row)
             item I18n.t("active_admin.view"), path, class: "view_link #{options[:css_class]}"
           end

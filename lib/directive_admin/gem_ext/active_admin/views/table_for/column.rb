@@ -48,9 +48,10 @@ module ActiveAdmin
 
           if @options[:link_to]
             id = key.gsub(/\w+$/, "id")
-            path = "/#{route_prefix}/#{key.split(".")[0..-2].inject(@options[:klass]) do |klass, association|
+            klass = key.split(".")[0..-2].inject(@options[:klass]) do |klass, association|
               klass.reflect_on_association(association.to_sym).klass
-            end.name.tableize}"
+            end
+            path = "/#{route_prefix}/#{DirectiveAdmin.namespace.resources[klass].resource_name.route_key}"
             @data = proc { |row|
               text = row[key]
               "<a href='#{path}/#{row[id]}'>#{text}</a>".html_safe unless text.blank?
@@ -59,9 +60,10 @@ module ActiveAdmin
 
           if @options[:links_to]
             id = key.gsub(/\w+$/, "id")
-            path = "/#{route_prefix}/#{key.split(".")[0..-2].inject(@options[:klass]) do |klass, association|
+            klass = key.split(".")[0..-2].inject(@options[:klass]) do |klass, association|
               klass.reflect_on_association(association.to_sym).klass
-            end.name.tableize}"
+            end
+            path = "/#{route_prefix}/#{DirectiveAdmin.namespace.resources[klass].resource_name.route_key}"
             @data = proc { |row|
               row[key.gsub(".", "_")].to_s.split(";,").collect do |text|
                 text.gsub! /;$/, ""
