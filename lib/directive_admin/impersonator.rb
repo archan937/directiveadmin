@@ -15,11 +15,14 @@ module DirectiveAdmin
 
       define_method current_user_method do
         unless instance_variables.include?(variable_name)
-          impersonated_user = actual_user = send(actual_user_method)
-          if actual_user && UserPolicy.new(actual_user, nil).impersonate? && (impersonated_user_id = session[session_key])
+          current_user = actual_user = send(actual_user_method)
+          if impersonated_user_id = session[session_key]
             impersonated_user = actual_user.class.find impersonated_user_id
           end
-          instance_variable_set(variable_name, impersonated_user)
+          if actual_user && impersonated_user && UserPolicy.new(actual_user, nil).impersonate? && (actual_user.admin? || !impersonated_user.admin?)
+            current_user = impersonated_user
+          end
+          instance_variable_set(variable_name, current_user)
         end
         instance_variable_get(variable_name)
       end

@@ -31,8 +31,8 @@ ActiveAdmin.after_load do
       admin.menus.instance_variable_get(:@menus).delete(key = :utility_navigation)
       admin.menus.menu(key) do |menu|
         admin.add_current_user_to_menu menu
-        if current_user_method && (current_user = send(current_user_method)) && UserPolicy.new(send(actual_user_method), nil).impersonate?
-          admin.add_impersonable_users_to_menu menu, current_user
+        if current_user_method && (current_user = send(current_user_method)) && UserPolicy.new((actual_user = send(actual_user_method)), nil).impersonate?
+          admin.add_impersonable_users_to_menu menu, current_user, actual_user
         end
         admin.add_logout_button_to_menu menu
       end

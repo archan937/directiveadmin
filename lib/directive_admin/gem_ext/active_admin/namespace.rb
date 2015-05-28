@@ -20,9 +20,11 @@ module ActiveAdmin
       end || name
     end
 
-    def add_impersonable_users_to_menu(menu, current_user)
-      (current_user.class.where("id != #{current_user.id}")).each do |user|
-        menu.add id: "impersonate_#{user.id}", label: ->{ display_name user }, url: "/impersonate/#{user.id}", parent: "current_user", html_options: {data: {no_turbolink: true}}
+    def add_impersonable_users_to_menu(menu, current_user, actual_user)
+      current_user.class.where("id != #{current_user.id}").each do |user|
+        if actual_user.admin? || !user.admin?
+          menu.add id: "impersonate_#{user.id}", label: ->{ display_name user }, url: "/impersonate/#{user.id}", parent: "current_user", html_options: {data: {no_turbolink: true}}
+        end
       end
     end
 
