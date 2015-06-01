@@ -136,13 +136,13 @@ module DirectiveAdmin
       end
 
       def panels_definition(key, page)
-        collection_panel = compose_definition key, :collection_panel do |page_presenters|
+        collection_panels = compose_definition(key, :collection_panel, {:track => [:columns, :column]}) do |page_presenters|
           page_presenters[page]
         end
-        panel = compose_definition(key, :panel) do |page_presenters|
+        panels = compose_definition(key, :panel, {:track => [:columns, :column]}) do |page_presenters|
           page_presenters[page]
         end
-        children = [(collection_panel[0] || {})[:children], (panel[0] || {})[:children]].flatten.compact
+        children = [(collection_panels[0] || {})[:children], (panels[0] || {})[:children]].flatten.compact
         if children.any?
           children.each do |child|
             child[:label] << " (0)" if child[:name].include?("collection_")
