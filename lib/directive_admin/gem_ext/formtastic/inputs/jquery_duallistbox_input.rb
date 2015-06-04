@@ -24,7 +24,6 @@ module Formtastic
           qry_options = {:limit => 1000}
           qry_options[:select] = %w(name id)
           qry_options[:where] = ["#{foreign_key} = #{object.id}"]
-          qry_options[:order_by] = %w(name)
           qry_options.merge!(options[:qry_options] || {})
 
           klass.qry qry_options
