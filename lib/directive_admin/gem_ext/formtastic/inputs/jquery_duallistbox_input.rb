@@ -6,7 +6,7 @@ module Formtastic
     private
 
       def inputs_html
-        options[:group_by] ? grouped_select_html : select_html
+        select_html
       end
 
       def foreign_key

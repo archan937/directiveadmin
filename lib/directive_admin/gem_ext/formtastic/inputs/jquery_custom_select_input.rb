@@ -7,7 +7,7 @@ module Formtastic
 
       def inputs_html
         options[:include_blank] ||= options[:placeholder]
-        options[:group_by] ? grouped_select_html : select_html
+        select_html
       end
 
       def collection_from_options
