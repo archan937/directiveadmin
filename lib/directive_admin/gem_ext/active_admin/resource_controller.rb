@@ -64,7 +64,8 @@ module ActiveAdmin
     end
 
     def find_resource
-      collection = original_find_collection
+      collection = apply_authorization_scope(scoped_collection)
+      collection = collection.all unless collection.respond_to?(:klass)
       klass = collection.klass
 
       conditions = collection.qry_options[:where] || []
