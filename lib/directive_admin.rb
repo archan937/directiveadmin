@@ -61,7 +61,7 @@ module DirectiveAdmin
       path = (args[1] || args[0]).to_s
       unless authorization && !authorization.authorized?(:column, path)
         if opts[:links_to]
-          result << "GROUP_CONCAT(CONCAT(#{path.gsub(/\w+$/, "id")}, ':', #{path}, ';')) AS #{path.gsub(".", "_")}"
+          result << "GROUP_CONCAT(DISTINCT CONCAT(#{path.gsub(/\w+$/, "id")}, ':', #{path}, ';')) AS #{path.gsub(".", "_")}"
         else
           result << path.gsub(/\w+$/, "id") if opts[:link_to]
           result << path
