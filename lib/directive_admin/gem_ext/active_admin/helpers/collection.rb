@@ -10,7 +10,7 @@ module ActiveAdmin
             end
           else
             result = DirectiveAdmin.to_table_collection(c, exclude: [:group_by, :order_by]) do
-              column "COUNT(id) AS collection_size"
+              column "COUNT(DISTINCT id) AS collection_size"
             end
             return result[0]["collection_size"]
           end
