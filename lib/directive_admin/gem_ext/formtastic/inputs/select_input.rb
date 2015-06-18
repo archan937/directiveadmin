@@ -3,7 +3,7 @@ module Formtastic
     class SelectInput
 
       def collection
-        super.sort{|a, b| a[0] <=> b[0]}
+        super.sort{|a, b| a[0].to_s.strip <=> b[0].to_s.strip}
       end
 
     end
