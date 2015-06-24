@@ -21,7 +21,7 @@ module ActiveAdmin
 
         authorize = options[:authorize]
         authorize ||= [:column, data, klass] unless data == ""
-        return if authorize && !authorized?(*authorize)
+        return if authorize && (authorize[1].class != ActiveAdmin::BatchActions::ResourceSelectionToggleCell) && !authorized?(*authorize)
 
         if options[:link_to] || options[:links_to]
           association_klass = data.split(".")[0..-2].inject(klass) do |klass, association|
