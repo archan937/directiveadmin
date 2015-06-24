@@ -7,12 +7,14 @@ ActiveAdmin.modal_dialog = (message, inputs, callback)->
       wrapper = 'textarea'
     else if $.isArray type
       [wrapper, elem, opts, type] = ['select', 'option', type, '']
+    else if name is 'function'
+      [name, wrapper, elem, opts] = $.express(type)()
     else
       throw new Error "Unsupported input type: {#{name}: #{type}}"
 
     klass = if type is 'datepicker' then type else ''
     html += """<li>
-      <label>#{name.charAt(0).toUpperCase() + name.slice(1)}</label>
+      <label>#{name.charAt(0).toUpperCase() + name.slice(1).replace(/_/, ' ')}</label>
       <#{wrapper} name="#{name}" class="#{klass}" type="#{type}">""" +
         (if opts then (
           for v in opts
