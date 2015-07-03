@@ -1,3 +1,5 @@
+require "directive_admin/gem_ext/active_admin/resource_controller/data_access"
+
 module ActiveAdmin
   class ResourceController < BaseController
 
