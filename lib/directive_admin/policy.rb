@@ -60,8 +60,13 @@ module DirectiveAdmin
       end
 
       def resolve
+        scope!
         authorize! unless user.admin?
         scope
+      end
+
+      def scope!
+        # override this
       end
 
       def authorize!
