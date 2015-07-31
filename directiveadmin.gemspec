@@ -27,6 +27,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency "rails",               ">= 3.2", "< 4.2"
   gem.add_dependency "ransack",             "~> 1.3"
   gem.add_dependency "sass-rails"
+  gem.add_dependency "jquery-turbolinks"
 
   # gem.add_dependency "activeadmin", ">= 1.0.0"
   gem.add_dependency "directiverecord", ">= 0.1.27"
