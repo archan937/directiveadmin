@@ -184,9 +184,9 @@ module DirectiveAdmin
         resource = resource_for_key(key)
         block = yield(resource.page_presenters).try(:block)
 
-        call_stack = CallStack.new
-        call_stack.track! track, &block if block
-        call_stack.calls
+        CallStack.new.tap do |call_stack|
+          call_stack.track! track, &block if block
+        end
       end
 
       def resource_for_key(key)

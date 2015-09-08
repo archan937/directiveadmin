@@ -1,0 +1,77 @@
+div.index_as_table
+  tr
+    .align-right, .numeric
+      text-align: right
+
+  tbody
+    tr
+      &.create_one
+
+        td
+          color: #1E2A33
+          text-align: center
+          a
+            color: #555
+            font-weight: bold
+
+      &.inline_form
+
+        td
+          padding: 6px 10px 5px
+
+          li
+            list-style: none
+
+            input
+              color: #7F8C8D
+              outline: none
+              border: 1px solid #C9D0D6
+
+              &:focus
+                border: 1px solid #66AFE9
+                box-shadow: 0 0 4px #66AFE9
+                -moz-box-shadow: 0 0 4px #66AFE9
+                -webkit-box-shadow: 0 0 4px #66AFE9
+
+            &.stringish
+              input
+                padding: 0 8px
+                line-height: 22px
+
+            &.numeric
+              input
+                width: 40px
+                text-align: right
+
+            &.date_picker
+              input
+                width: 75px
+                padding-left: 28px
+                background: 5px 52% no-repeat url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAB6ElEQVR4AZ3RzWsTQRjH8e/M7mZJ1VJrTiraUipB6FVBUA/SgihaCREURATrxaP+BUJv4kmhKnrxIFgET1LbeqhJ7MvBhjZNiy9ESC5SwSCFNMnujjs7WClUif3Bw4dheZ59hhGzz2+rIz+eARIQtBYFBMztvoJQI3sVpx5AEPxfv5Tw9iY2FrD6AVZeAqKFLZSpZAosEBdflNXj9H5KTaII0cICCrodGBotI61GlThQyeZol/BtOsceG77P5Ehs4ep0lg4BbYDdqIblNbEgrIBSLsPIfAInX0SITpSWzSrVSX1ukVe3+mh4HrLu+0igfYfLsRPHQyXnUofZ1fZ3z6b60Fn3PUT/wxk1fuMoV59+wrUhZoEAhDB33aypWtPnybUkA49m9QYBOjvjgvSZXtyYZPB0L47zx/Oh9m+j70mzgRcg1z0fHde1mMyWiLmSyYxxItSJWYy9+4pwLF5PGccyXzausDFA/+FyfzeWLbk0YNRnQu8OdnH90Br3LnQxFHo/3WMGNANkzQvMAFcymisjY1Zoxfi+gggtFBao+4r5hcXIfD6PTtR7cHhC6XxeKW7px2XjUnE5srCkzyYHwl72DY+r7Ub32qL2cypx583JZmDeCATwL80bO1IQb6xNCaAH6GB7qf4CMuw66igyQLgAAAAASUVORK5CYII=)
+
+          a
+            margin: 1px 1px 0
+            padding: 0 9px
+            font-family: Helvetica, Arial, sans-serif
+            font-weight: bold
+            font-size: 10px
+            line-height: 21px
+            text-decoration: none
+
+            &.save
+              margin-left: -4px
+              margin-right: 4px
+              color: white
+              background: #F2671D
+              border: 1px solid #F2671D
+
+              &:hover
+                background: #F5874D
+
+            &.cancel
+              color: #95A5A6
+              background: #ECF0F1
+              border: 1px solid #C7C7C7
+
+              &:hover
+                background: #FBFCFC

@@ -1,0 +1,16 @@
+<tr class="inline_form">
+  <%= semantic_form_for resource, url: (resource.persisted? ? resource_path(resource) : collection_path), as: active_admin_config.param_key do |f| %>
+    <%- form_columns.each do |column| -%>
+    <td>
+      <%- if column -%>
+        <%- if column[:name] -%>
+          <%= f.input column[:name], column.except(:name) %>
+        <%- elsif column[:actions] -%>
+          <%= link_to "Save", "#", :class => "save" %>
+          <%= link_to "Cancel", "#", :class => "cancel" %>
+        <%- end -%>
+      <%- end -%>
+    </td>
+    <%- end -%>
+  <% end %>
+</tr>
